@@ -4,7 +4,7 @@ package com.example.admin1.myapplication1;
  * Created by admin1 on 2017/6/28.
  */
 
-public class Introductions {
+public class ExamInformations {
     /**
      * subjectTitle : c1
      * uid : 1
