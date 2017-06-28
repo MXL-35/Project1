@@ -13,6 +13,7 @@
     <Button
         android:id="@+id/button"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:drawableTop="@mipmap/main_menu_exam"
         android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
     <Button
         android:layout_gravity="center"
         android:id="@+id/button2"
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableTop="@mipmap/main_menu_result"
@@ -40,6 +42,7 @@
         <Button
             android:layout_gravity="center"
             android:id="@+id/button3"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@mipmap/main_menu_message"
@@ -50,6 +53,7 @@
         <Button
             android:layout_gravity="center"
             android:id="@+id/button4"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@mipmap/main_menu_exit"
