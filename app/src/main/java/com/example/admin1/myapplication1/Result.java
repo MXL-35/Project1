@@ -6,7 +6,7 @@ import java.util.List;
  * Created by admin1 on 2017/6/28.
  */
 
-public class Information {
+public class Result {
     /**
      * error_code : 0
      * reason : ok
