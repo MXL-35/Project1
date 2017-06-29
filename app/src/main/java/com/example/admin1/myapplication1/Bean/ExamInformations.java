@@ -53,7 +53,7 @@ public class ExamInformations {
     public String toString() {
         return "考场信息:{" +
                 "考试科目:'" + subjectTitle +"\n" +
-                "考试时间:" + limitTime +"\n"+
+                "考试时间:" + limitTime +"分钟"+"\n"+
                 "考题数量:" + questionCount +
                 '}';
     }
