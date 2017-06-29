@@ -1,4 +1,4 @@
-package com.example.admin1.myapplication1;
+package com.example.admin1.myapplication1.Bean;
 
 /**
  * Created by admin1 on 2017/6/28.
@@ -47,5 +47,14 @@ public class ExamInformations {
 
     public int getQuestionCount() {
         return questionCount;
+    }
+
+    @Override
+    public String toString() {
+        return "考场信息:{" +
+                "考试科目:'" + subjectTitle +"\n" +
+                "考试时间:" + limitTime +"\n"+
+                "考题数量:" + questionCount +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
-package com.example.admin1.myapplication1;
+package com.example.admin1.myapplication1.Bean;
 
 /**
  * Created by admin1 on 2017/6/28.
@@ -26,6 +26,7 @@ public class Questions {
     private String item4;
     private String explains;
     private String url;
+    private String userAnswer;
 
     public void setId(int id) {
         this.id = id;
@@ -63,6 +64,9 @@ public class Questions {
         this.url = url;
     }
 
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
     public int getId() {
         return id;
     }
@@ -97,5 +101,9 @@ public class Questions {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getUserAnswer() {
+        return userAnswer;
     }
 }

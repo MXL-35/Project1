@@ -1,10 +1,12 @@
-package com.example.admin1.myapplication1;
+package com.example.admin1.myapplication1.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.admin1.myapplication1.R;
 
 /**
  * Created by Administrator on 2017/6/28.
