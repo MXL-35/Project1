@@ -127,21 +127,25 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_marginLeft="15dp"
+           android:textColor="#000"
        android:text="A"/>
        <CheckBox
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="15dp"
+           android:textColor="#000"
            android:text="B"/>
        <CheckBox
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="15dp"
+           android:textColor="#000"
            android:text="C"/>
        <CheckBox
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="15dp"
+           android:textColor="#000"
            android:text="D"/>
    </LinearLayout>
     <RelativeLayout
@@ -154,6 +158,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/exam_pre32x32"
             android:layout_alignParentLeft="true"
+            android:textColor="#000"
             android:background="@null"
             android:text="上一题"/>
         <Button
@@ -163,6 +168,7 @@
             android:drawableLeft="@mipmap/exam_next32x32"
             android:layout_alignParentRight="true"
             android:background="@null"
+            android:textColor="#000"
             android:text="下一题"/>
         <Button
             android:layout_width="wrap_content"
@@ -171,6 +177,7 @@
             android:layout_below="@+id/btn_next"
             android:layout_alignParentRight="true"
             android:background="@null"
+            android:textColor="#000"
             android:text="交卷"/>
     </RelativeLayout>
 </LinearLayout>
