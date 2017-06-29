@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My Application1</string>
+    <string name="exam_title">"考试科目:C1\n""考试时间:100分钟\n""考题数量:100" </string>
 </resources>
