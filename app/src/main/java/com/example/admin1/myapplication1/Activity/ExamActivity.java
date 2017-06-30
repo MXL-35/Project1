@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.admin1.myapplication1.Bean.ExamInformations;
 import com.example.admin1.myapplication1.Bean.Questions;
 import com.example.admin1.myapplication1.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,6 +48,9 @@ public class ExamActivity extends AppCompatActivity{
             tv_op2.setText(questions.getItem2());
             tv_op3.setText(questions.getItem3());
             tv_op4.setText(questions.getItem4());
+            Picasso.with(ExamActivity.this)
+                    .load(questions.getUrl())
+                    .into(img_examimg);
 
         }
     }
