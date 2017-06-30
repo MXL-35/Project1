@@ -3,6 +3,7 @@ package com.example.admin1.myapplication1.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -28,13 +29,21 @@ public class ExamActivity extends AppCompatActivity{
     TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4;
     ImageView img_examimg;
     IExamBiz biz;
+    LoadExamBroadcast loadExamBroadcast;
+    LoadQuestionBroadcast loadQuestionBroadcast;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exam_layout);
+        loadExamBroadcast=new LoadExamBroadcast();
+        loadQuestionBroadcast=new LoadQuestionBroadcast();
+        setLister();
         initView();
         loadData();
     }
+
+
 
     private void loadData() {
         biz=new ExamBiz();
@@ -44,6 +53,9 @@ public class ExamActivity extends AppCompatActivity{
                 biz.beginExam();
             }
         }).start();
+    }private void setLister() {
+        registerReceiver(loadExamBroadcast,new IntentFilter(ExamApplication.LOAD_EXAM_INFO));
+        registerReceiver(loadQuestionBroadcast,new IntentFilter(ExamApplication.LOAD_EXAM_QUESTION));
     }
 
     private void initData() {
@@ -81,7 +93,20 @@ public class ExamActivity extends AppCompatActivity{
     private void showData(ExamInformations examInformation) {
         tv_examinfo.setText(examInformation.toString());
     }
-class  LoadExamBroadcast extends BroadcastReceiver
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(loadExamBroadcast!=null){
+            unregisterReceiver(loadExamBroadcast);
+        }
+        if(loadQuestionBroadcast!=null)
+        {
+            unregisterReceiver(loadQuestionBroadcast);
+        }
+    }
+
+    class  LoadExamBroadcast extends BroadcastReceiver
 {
 
     @Override
