@@ -82,6 +82,7 @@ public class ExamActivity extends AppCompatActivity{
                 }
             } else
             {
+                layoutLoading.setEnabled(true);
                 dialog.setVisibility(View.GONE);
                 tv_load.setText("下载失败,点击重新下载");
 
@@ -159,6 +160,12 @@ public class ExamActivity extends AppCompatActivity{
         img_examimg=(ImageView) findViewById(R.id.img_exam_img);
         tv_load=(TextView) findViewById(R.id.tv_load);
         dialog=(ProgressBar) findViewById(R.id.load_dialog);
+        layoutLoading.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                loadData();
+            }
+        });
     }
 
 
