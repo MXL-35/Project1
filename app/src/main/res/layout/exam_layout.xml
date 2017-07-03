@@ -71,6 +71,7 @@
         tools:src="@mipmap/exam_img"
         android:layout_gravity="center_horizontal"/>
     <LinearLayout
+        android:id="@+id/layout_01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -90,6 +91,7 @@
             android:textSize="18sp"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/layout_02"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -109,6 +111,7 @@
             android:textSize="18sp"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/layout_03"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -128,6 +131,7 @@
             android:textSize="18dp"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/layout_04"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -152,24 +156,28 @@
        android:orientation="horizontal"
        android:layout_margin="10dp">
        <CheckBox
+        android:id="@+id/cb_01"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_marginLeft="15sp"
            android:textColor="#000"
        android:text="A"/>
        <CheckBox
+           android:id="@+id/cb_02"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="15dp"
            android:textColor="#000"
            android:text="B"/>
        <CheckBox
+           android:id="@+id/cb_03"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="15dp"
            android:textColor="#000"
            android:text="C"/>
        <CheckBox
+           android:id="@+id/cb_04"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="15dp"
