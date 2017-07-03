@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -31,10 +33,12 @@ public class ExamActivity extends AppCompatActivity{
     boolean isLoadQuestionReceiver=false;
     boolean isLoadExamInfo=false;
     boolean isLoadQuestion=false;
+    CheckBox cb_01,cb_02,cb_03,cb_04;
+    CheckBox [] cbs=new CheckBox[4];
     TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4,tv_load,tv_exam_no;
     ProgressBar dialog;
     ImageView img_examimg;
-    LinearLayout layoutLoading;
+    LinearLayout layoutLoading,layout_01,layout_02,layout_03,layout_04;
     IExamBiz biz;
     LoadExamBroadcast loadExamBroadcast;
     LoadQuestionBroadcast loadQuestionBroadcast;
@@ -90,11 +94,15 @@ public class ExamActivity extends AppCompatActivity{
     private void showExam(Questions questions) {
         if(questions!=null){
             tv_exam_no.setText(biz.getExamIndex());
-          tv_exam_title.setText(questions.getQuestion());
+            tv_exam_title.setText(questions.getQuestion());
             tv_op1.setText(questions.getItem1());
             tv_op2.setText(questions.getItem2());
             tv_op3.setText(questions.getItem3());
             tv_op4.setText(questions.getItem4());
+            layout_03.setVisibility(questions.getItem3().equals("")?View.GONE:View.VISIBLE);
+            cb_03.setVisibility(questions.getItem3().equals("")?View.GONE:View.VISIBLE);
+            layout_04.setVisibility(questions.getItem4().equals("")?View.GONE:View.VISIBLE);
+            cb_04.setVisibility(questions.getItem4().equals("")?View.GONE:View.VISIBLE);
             if(questions.getUrl()!=null && !questions.getUrl().equals(""))
             {
                 img_examimg.setVisibility(View.VISIBLE);
@@ -161,12 +169,24 @@ public class ExamActivity extends AppCompatActivity{
     }
     private void initView() {
         layoutLoading=(LinearLayout) findViewById(R.id.layout_loading);
+        layout_01=(LinearLayout) findViewById(R.id.layout_01);
+        layout_02=(LinearLayout) findViewById(R.id.layout_02);
+        layout_03=(LinearLayout) findViewById(R.id.layout_03);
+        layout_04=(LinearLayout) findViewById(R.id.layout_04);
         tv_examinfo=(TextView) findViewById(R.id.tv_examinfo);
         tv_exam_title=(TextView) findViewById(R.id.tv_exam_title);
         tv_op1=(TextView) findViewById(R.id.tv_op1);
         tv_op2=(TextView) findViewById(R.id.tv_op2);
         tv_op3=(TextView) findViewById(R.id.tv_op3);
         tv_op4=(TextView) findViewById(R.id.tv_op4);
+        cb_01=(CheckBox) findViewById(R.id.cb_01);
+        cb_02=(CheckBox) findViewById(R.id.cb_02);
+        cb_03=(CheckBox) findViewById(R.id.cb_03);
+        cb_04=(CheckBox) findViewById(R.id.cb_04);
+        cbs[0]=cb_01;
+        cbs[1]=cb_02;
+        cbs[2]=cb_03;
+        cbs[3]=cb_04;
         img_examimg=(ImageView) findViewById(R.id.img_exam_img);
         tv_load=(TextView) findViewById(R.id.tv_load);
         dialog=(ProgressBar) findViewById(R.id.load_dialog);
@@ -177,5 +197,42 @@ public class ExamActivity extends AppCompatActivity{
                 loadData();
             }
         });
+        cb_01.setOnCheckedChangeListener(listener);
+        cb_02.setOnCheckedChangeListener(listener);
+        cb_03.setOnCheckedChangeListener(listener);
+        cb_04.setOnCheckedChangeListener(listener);
     }
+    CompoundButton.OnCheckedChangeListener listener=new CompoundButton.OnCheckedChangeListener(){
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if(isChecked)
+            {
+                int userAnswer=0;
+                switch(buttonView.getId())
+                {
+                    case R.id.cb_01:
+                        userAnswer=1;
+                        break;
+                    case R.id.cb_02:
+                        userAnswer=2;
+                        break;
+                    case R.id.cb_03:
+                        userAnswer=3;
+                        break;
+                    case R.id.cb_04:
+                        userAnswer=4;
+                        break;
+                }
+                if(userAnswer>0)
+                {
+                    for(CheckBox cb:cbs)
+                    {
+                        cb.setChecked(false);
+                    }
+                    cbs[userAnswer-1].setChecked(true);
+                }
+            }
+        }
+    };
 }
