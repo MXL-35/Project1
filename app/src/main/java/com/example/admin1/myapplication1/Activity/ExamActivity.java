@@ -31,7 +31,7 @@ public class ExamActivity extends AppCompatActivity{
     boolean isLoadQuestionReceiver=false;
     boolean isLoadExamInfo=false;
     boolean isLoadQuestion=false;
-    TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4,tv_load;
+    TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4,tv_load,tv_exam_no;
     ProgressBar dialog;
     ImageView img_examimg;
     LinearLayout layoutLoading;
@@ -76,10 +76,7 @@ public class ExamActivity extends AppCompatActivity{
                 {
                     showData(examInformation);
                 }
-                List<Questions> examList=ExamApplication.getInstance().getExamList();
-                if(examList!=null){
-                    showExam(examList);
-                }
+                showExam( biz.getExam());
             } else
             {
                 layoutLoading.setEnabled(true);
@@ -90,18 +87,23 @@ public class ExamActivity extends AppCompatActivity{
         }
     }
 
-    private void showExam(List<Questions> examList) {
-        Questions questions=examList.get(0);
+    private void showExam(Questions questions) {
         if(questions!=null){
+            tv_exam_no.setText(biz.getExamIndex());
           tv_exam_title.setText(questions.getQuestion());
             tv_op1.setText(questions.getItem1());
             tv_op2.setText(questions.getItem2());
             tv_op3.setText(questions.getItem3());
             tv_op4.setText(questions.getItem4());
-            Picasso.with(ExamActivity.this)
-                    .load(questions.getUrl())
-                    .into(img_examimg);
-
+            if(questions.getUrl()!=null && !questions.getUrl().equals(""))
+            {
+                img_examimg.setVisibility(View.VISIBLE);
+                Picasso.with(ExamActivity.this)
+                        .load(questions.getUrl())
+                        .into(img_examimg);
+            }else {
+                img_examimg.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -120,6 +122,14 @@ public class ExamActivity extends AppCompatActivity{
         {
             unregisterReceiver(loadQuestionBroadcast);
         }
+    }
+
+    public void preExam(View view) {
+        showExam(biz.preQuestion());
+    }
+
+    public void nextExam(View view) {
+        showExam(biz.nextQuestion());
     }
 
     class  LoadExamBroadcast extends BroadcastReceiver
@@ -160,6 +170,7 @@ public class ExamActivity extends AppCompatActivity{
         img_examimg=(ImageView) findViewById(R.id.img_exam_img);
         tv_load=(TextView) findViewById(R.id.tv_load);
         dialog=(ProgressBar) findViewById(R.id.load_dialog);
+        tv_exam_no=(TextView) findViewById(R.id.tv_exam_no);
         layoutLoading.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -167,6 +178,4 @@ public class ExamActivity extends AppCompatActivity{
             }
         });
     }
-
-
 }
