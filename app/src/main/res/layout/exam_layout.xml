@@ -5,6 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@mipmap/main">
+    <LinearLayout
+        android:id="@+id/layout_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ProgressBar
+            android:id="@+id/load_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_load"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下载数据..."
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
    <ImageView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
@@ -41,7 +61,7 @@
             android:layout_height="wrap_content"
             tools:text="这个标志是何含义?"
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
     </LinearLayout>
     <ImageView
         android:id="@+id/img_exam_img"
@@ -59,14 +79,14 @@
             android:layout_height="wrap_content"
             android:text="A."
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
         <TextView
             android:id="@+id/tv_op1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="车道数变少"
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,14 +98,14 @@
             android:layout_height="wrap_content"
             android:text="B."
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
         <TextView
             android:id="@+id/tv_op2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="合流处"
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,7 +117,7 @@
             android:layout_height="wrap_content"
             android:text="C."
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
         <TextView
             android:id="@+id/tv_op3"
             android:layout_width="wrap_content"
@@ -116,14 +136,14 @@
             android:layout_height="wrap_content"
             android:text="D."
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
         <TextView
             android:id="@+id/tv_op4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="像左变道"
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
     </LinearLayout>
    <LinearLayout
        android:layout_width="match_parent"
@@ -133,7 +153,7 @@
        <CheckBox
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_marginLeft="15dp"
+       android:layout_marginLeft="15sp"
            android:textColor="#000"
        android:text="A"/>
        <CheckBox
