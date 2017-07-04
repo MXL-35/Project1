@@ -2,10 +2,12 @@ package com.example.admin1.myapplication1.Activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -35,7 +37,7 @@ public class ExamActivity extends AppCompatActivity{
     boolean isLoadQuestion=false;
     CheckBox cb_01,cb_02,cb_03,cb_04;
     CheckBox [] cbs=new CheckBox[4];
-    TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4,tv_load,tv_exam_no;
+    TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4,tv_load,tv_exam_no,tv_result;
     ProgressBar dialog;
     ImageView img_examimg;
     LinearLayout layoutLoading,layout_01,layout_02,layout_03,layout_04;
@@ -160,6 +162,26 @@ public class ExamActivity extends AppCompatActivity{
     public void nextExam(View view) {
        saveUserAnswer();
         showExam(biz.nextQuestion());
+    }
+
+    public void commitExam(View view) {
+        saveUserAnswer();
+       int s= biz.commitExam();
+        View inflate=View.inflate(this,R.layout.layout_result,null);
+        TextView tvResult=(TextView) inflate.findViewById(R.id.tv_result);
+        tvResult.setText("你的分数为\n"+s+"分!");
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setIcon(R.mipmap.exam_commit32x32)
+                .setTitle("交卷")
+                .setView(inflate)
+                .setPositiveButton("OK",new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+        builder.create().show();
     }
 
     class  LoadExamBroadcast extends BroadcastReceiver

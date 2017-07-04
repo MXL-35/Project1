@@ -216,6 +216,7 @@
             android:layout_alignParentRight="true"
             android:background="@null"
             android:textColor="#000"
+            android:onClick="commitExam"
             android:text="交卷"/>
     </RelativeLayout>
 </LinearLayout>
