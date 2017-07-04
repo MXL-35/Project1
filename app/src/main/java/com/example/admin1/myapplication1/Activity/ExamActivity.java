@@ -42,7 +42,6 @@ public class ExamActivity extends AppCompatActivity{
     IExamBiz biz;
     LoadExamBroadcast loadExamBroadcast;
     LoadQuestionBroadcast loadQuestionBroadcast;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,9 +111,22 @@ public class ExamActivity extends AppCompatActivity{
             }else {
                 img_examimg.setVisibility(View.GONE);
             }
+            resetOptions();
+            String userAnswer=questions.getUserAnswer();
+            if(userAnswer!=null && !userAnswer.equals(""))
+            {
+                int userCB=Integer.parseInt(userAnswer)-1;
+                cbs[userCB].setChecked(true);
+            }
         }
     }
 
+    private void resetOptions() {
+        for(CheckBox cb:cbs)
+        {
+            cb.setChecked(false);
+        }
+    }
 
     private void showData(ExamInformations examInformation) {
         tv_examinfo.setText(examInformation.toString());
@@ -133,10 +145,12 @@ public class ExamActivity extends AppCompatActivity{
     }
 
     public void preExam(View view) {
+       // saveUserAnswer();
         showExam(biz.preQuestion());
     }
 
     public void nextExam(View view) {
+       // saveUserAnswer();
         showExam(biz.nextQuestion());
     }
 
