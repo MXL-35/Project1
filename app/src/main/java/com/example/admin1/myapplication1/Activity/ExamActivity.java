@@ -153,12 +153,12 @@ public class ExamActivity extends AppCompatActivity{
     }
 
     public void preExam(View view) {
-       // saveUserAnswer();
+       saveUserAnswer();
         showExam(biz.preQuestion());
     }
 
     public void nextExam(View view) {
-       // saveUserAnswer();
+       saveUserAnswer();
         showExam(biz.nextQuestion());
     }
 
