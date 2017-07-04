@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -23,6 +24,7 @@ import com.example.admin1.myapplication1.Bean.Questions;
 import com.example.admin1.myapplication1.Biz.ExamBiz;
 import com.example.admin1.myapplication1.Biz.IExamBiz;
 import com.example.admin1.myapplication1.R;
+import com.example.admin1.myapplication1.View.QuestionAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -43,8 +45,10 @@ public class ExamActivity extends AppCompatActivity{
     TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4,tv_load,tv_exam_no,tv_result,tv_time;
     ProgressBar dialog;
     ImageView img_examimg;
+    Gallery gallery;
     LinearLayout layoutLoading,layout_01,layout_02,layout_03,layout_04;
     IExamBiz biz;
+    QuestionAdapter adapter;
     LoadExamBroadcast loadExamBroadcast;
     LoadQuestionBroadcast loadQuestionBroadcast;
     @Override
@@ -85,6 +89,7 @@ public class ExamActivity extends AppCompatActivity{
                     showData(examInformation);
                     initTimer(examInformation);
                 }
+                initGallery();
                 showExam( biz.getExam());
             } else
             {
@@ -94,6 +99,10 @@ public class ExamActivity extends AppCompatActivity{
 
             }
         }
+    }
+    private void initGallery() {
+        adapter=new QuestionAdapter(this);
+        gallery.setAdapter(adapter);
     }
 
     private void initTimer(ExamInformations examInformation) {
@@ -246,6 +255,7 @@ public class ExamActivity extends AppCompatActivity{
         }
     }
     private void initView() {
+        gallery=(Gallery) findViewById(R.id.gallery);
         layoutLoading=(LinearLayout) findViewById(R.id.layout_loading);
         layout_01=(LinearLayout) findViewById(R.id.layout_01);
         layout_02=(LinearLayout) findViewById(R.id.layout_02);
