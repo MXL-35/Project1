@@ -127,7 +127,15 @@ public class ExamActivity extends AppCompatActivity{
             cb.setChecked(false);
         }
     }
+    private void saveUserAnswer(){
 
+        for (int i = 0; i <cbs.length ; i++) {
+            if(cbs[i].isChecked()){
+                biz.getExam().setUserAnswer(String.valueOf(i+1));
+                return;
+            }
+        }
+    }
     private void showData(ExamInformations examInformation) {
         tv_examinfo.setText(examInformation.toString());
     }
