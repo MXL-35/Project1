@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.media.MediaMetadataCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,6 +26,8 @@ import com.example.admin1.myapplication1.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Administrator on 2017/6/29.
@@ -37,7 +40,7 @@ public class ExamActivity extends AppCompatActivity{
     boolean isLoadQuestion=false;
     CheckBox cb_01,cb_02,cb_03,cb_04;
     CheckBox [] cbs=new CheckBox[4];
-    TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4,tv_load,tv_exam_no,tv_result;
+    TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4,tv_load,tv_exam_no,tv_result,tv_time;
     ProgressBar dialog;
     ImageView img_examimg;
     LinearLayout layoutLoading,layout_01,layout_02,layout_03,layout_04;
@@ -80,6 +83,7 @@ public class ExamActivity extends AppCompatActivity{
                 if(examInformation!=null)
                 {
                     showData(examInformation);
+                    initTimer(examInformation);
                 }
                 showExam( biz.getExam());
             } else
@@ -92,6 +96,38 @@ public class ExamActivity extends AppCompatActivity{
         }
     }
 
+    private void initTimer(ExamInformations examInformation) {
+        int sumTime=examInformation.getLimitTime()*60*1000;
+        final long overTime=sumTime+System.currentTimeMillis();
+        final Timer timer=new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                long l=overTime-System.currentTimeMillis();
+                final long min=l/1000/60;
+                final long sec=l/1000%60;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv_time.setText("剩余时间:"+min+"分"+sec+"秒");
+                    }
+                });
+            }
+        },0,1000);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        commitExam(null);
+                    }
+                });
+            }
+        },sumTime);
+    }
+
     private void showExam(Questions questions) {
         if(questions!=null){
             tv_exam_no.setText(biz.getExamIndex());
@@ -100,6 +136,7 @@ public class ExamActivity extends AppCompatActivity{
             tv_op2.setText(questions.getItem2());
             tv_op3.setText(questions.getItem3());
             tv_op4.setText(questions.getItem4());
+            tv_time=(TextView) findViewById(R.id.tv_time);
             layout_03.setVisibility(questions.getItem3().equals("")?View.GONE:View.VISIBLE);
             cb_03.setVisibility(questions.getItem3().equals("")?View.GONE:View.VISIBLE);
             layout_04.setVisibility(questions.getItem4().equals("")?View.GONE:View.VISIBLE);
@@ -155,12 +192,12 @@ public class ExamActivity extends AppCompatActivity{
     }
 
     public void preExam(View view) {
-       saveUserAnswer();
+        saveUserAnswer();
         showExam(biz.preQuestion());
     }
 
     public void nextExam(View view) {
-       saveUserAnswer();
+        saveUserAnswer();
         showExam(biz.nextQuestion());
     }
 
@@ -175,7 +212,6 @@ public class ExamActivity extends AppCompatActivity{
                 .setTitle("交卷")
                 .setView(inflate)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener(){
-
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -183,7 +219,6 @@ public class ExamActivity extends AppCompatActivity{
                 });
         builder.create().show();
     }
-
     class  LoadExamBroadcast extends BroadcastReceiver
    {
 
@@ -200,7 +235,6 @@ public class ExamActivity extends AppCompatActivity{
 
     class  LoadQuestionBroadcast extends BroadcastReceiver
     {
-
         @Override
         public void onReceive(Context context, Intent intent) {
             boolean isSuccess=intent.getBooleanExtra(ExamApplication.LOAD_DATA_SUCCESS,false);
