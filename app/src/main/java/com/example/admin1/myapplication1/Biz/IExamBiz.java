@@ -9,8 +9,9 @@ import com.example.admin1.myapplication1.Bean.Questions;
 public interface IExamBiz {
     void beginExam();
     Questions getExam();
+    Questions getExam(int index);
     Questions nextQuestion();
     Questions preQuestion();
-    void commitExam();
+    int commitExam();
     String getExamIndex();
 }

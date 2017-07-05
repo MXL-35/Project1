@@ -11,6 +11,7 @@ import android.support.v4.media.MediaMetadataCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Gallery;
@@ -103,6 +104,13 @@ public class ExamActivity extends AppCompatActivity{
     private void initGallery() {
         adapter=new QuestionAdapter(this);
         gallery.setAdapter(adapter);
+        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                saveUserAnswer();
+                showExam(biz.getExam(position));
+            }
+        });
     }
 
     private void initTimer(ExamInformations examInformation) {
@@ -212,7 +220,7 @@ public class ExamActivity extends AppCompatActivity{
 
     public void commitExam(View view) {
         saveUserAnswer();
-       int s= biz.commitExam();
+        int s= biz.commitExam();
         View inflate=View.inflate(this,R.layout.layout_result,null);
         TextView tvResult=(TextView) inflate.findViewById(R.id.tv_result);
         tvResult.setText("你的分数为\n"+s+"分!");

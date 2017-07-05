@@ -34,6 +34,16 @@ public class ExamBiz implements  IExamBiz {
             return null;
         }
     }
+    public Questions getExam(int index) {
+        examList=ExamApplication.getInstance().getExamList();
+        examIndex=index;
+        if(examList!=null)
+        {
+            return  examList.get(examIndex);
+        }else {
+            return null;
+        }
+    }
     @Override
     public Questions nextQuestion() {
         if(examList!=null && examIndex<examList.size()-1)
@@ -58,8 +68,17 @@ public class ExamBiz implements  IExamBiz {
     }
 
     @Override
-    public void commitExam() {
-
+    public int commitExam() {
+        int s=0;
+        for(Questions questions:examList){
+            String userAnswer=questions.getUserAnswer();
+            if(userAnswer!=null && !userAnswer.equals("")){
+                if(questions.getAnswer().equals(userAnswer)){
+                    s++;
+                }
+            }
+        }
+        return  s;
     }
     public  String getExamIndex()
     {
