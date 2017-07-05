@@ -2,7 +2,6 @@ package com.example.admin1.myapplication1.Dao;
 
 import android.content.Intent;
 import android.util.Log;
-
 import com.example.admin1.myapplication1.Activity.ExamApplication;
 import com.example.admin1.myapplication1.Bean.ExamInformations;
 import com.example.admin1.myapplication1.Bean.Questions;
