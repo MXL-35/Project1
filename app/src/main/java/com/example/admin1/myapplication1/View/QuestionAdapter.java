@@ -47,10 +47,11 @@ Context context;
         TextView tvNo=(TextView) view.findViewById(R.id.tv_no);
         ImageView ivQuestion=(ImageView) view.findViewById(R.id.iv_question);
         String ua=examList.get(position).getUserAnswer();
+        String ra=examList.get(position).getAnswer();
         if(ua!=null && !ua.equals("")){
-            ivQuestion.setImageResource(R.mipmap.answer24x24);
+            ivQuestion.setImageResource(ua.equals(ra)?R.mipmap.answer24x24:R.mipmap.error24x24);
         }else {
-            ivQuestion.setImageResource(R.mipmap.ques24x24);
+            ivQuestion.setImageResource(R.mipmap.unknown24x24);
         }
         tvNo.setText("第"+(position+1)+"题");
         return view;

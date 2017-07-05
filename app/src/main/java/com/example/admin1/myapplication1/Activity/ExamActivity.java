@@ -43,6 +43,7 @@ public class ExamActivity extends AppCompatActivity{
     boolean isLoadQuestion=false;
     CheckBox cb_01,cb_02,cb_03,cb_04;
     CheckBox [] cbs=new CheckBox[4];
+    TextView [] tv0ps=new TextView[4];
     TextView tv_examinfo,tv_exam_title,tv_op1,tv_op2,tv_op3,tv_op4,tv_load,tv_exam_no,tv_result,tv_time;
     ProgressBar dialog;
     ImageView img_examimg;
@@ -173,10 +174,44 @@ public class ExamActivity extends AppCompatActivity{
             {
                 int userCB=Integer.parseInt(userAnswer)-1;
                 cbs[userCB].setChecked(true);
+                setOptions(true);
+                setAnswerTextColor(userAnswer,questions.getAnswer());
+            }else {
+                setOptions(false);
+                setOptionsColor();
             }
         }
     }
 
+    private void setOptionsColor() {
+        for (TextView tvOp:tv0ps){
+            tvOp.setTextColor(getResources().getColor(R.color.black));
+        }
+    }
+
+    private void setAnswerTextColor(String userAnswer, String answer) {
+       int ra=Integer.parseInt(answer)-1;
+        for (int i=0;i<tv0ps.length;i++){
+            if (i==ra){
+                tv0ps[i].setTextColor(getResources().getColor(R.color.green));
+            }else {
+                if (! userAnswer.equals(answer)){
+                    int ua=Integer.parseInt(userAnswer)-1;
+                    if(i==ua){
+                        tv0ps[i].setTextColor(getResources().getColor(R.color.red));
+                    }else {
+                        tv0ps[i].setTextColor(getResources().getColor(R.color.black));
+                    }
+                }
+            }
+        }
+    }
+
+    private void setOptions(boolean hasAnswer){
+        for(CheckBox cb:cbs){
+            cb.setEnabled(!hasAnswer);
+        }
+    }
     private void resetOptions() {
         for(CheckBox cb:cbs)
         {
@@ -286,6 +321,10 @@ public class ExamActivity extends AppCompatActivity{
         cbs[1]=cb_02;
         cbs[2]=cb_03;
         cbs[3]=cb_04;
+        tv0ps[0]=tv_op1;
+        tv0ps[1]=tv_op2;
+        tv0ps[2]=tv_op3;
+        tv0ps[3]=tv_op4;
         img_examimg=(ImageView) findViewById(R.id.img_exam_img);
         tv_load=(TextView) findViewById(R.id.tv_load);
         dialog=(ProgressBar) findViewById(R.id.load_dialog);
