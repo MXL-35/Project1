@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ExamActivity" android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".Activity.ExamActivity" android:theme="@style/Theme.AppCompat.NoActionBar" android:screenOrientation="portrait">
         </activity>
     </application>
 
