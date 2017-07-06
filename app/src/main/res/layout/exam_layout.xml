@@ -198,6 +198,12 @@
                     android:textColor="#000"
                     android:text="D"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/tv_explains"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="18sp"/>
             <Gallery
                 android:id="@+id/gallery"
                 android:spacing="10dp"

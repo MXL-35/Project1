@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -69,6 +70,8 @@ public class ExamActivity extends AppCompatActivity {
     ImageView img_examimg;
     @BindView(R.id.tv_op1)
     TextView tv_op1;
+    @BindView(R.id.tv_explains)
+    TextView tv_explains;
     @BindView(R.id.layout_01)
     LinearLayout  layout_01;
     @BindView(R.id.tv_op2)
@@ -183,7 +186,7 @@ public class ExamActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        commitExam(null);
+                        commitExam();
                     }
                 });
             }
@@ -211,20 +214,26 @@ public class ExamActivity extends AppCompatActivity {
             } else {
                 img_examimg.setVisibility(View.GONE);
             }
+            for (TextView tv : tv0ps) {
+                tv.setTextColor(getResources().getColor(R.color.black));
+            }
             resetOptions();
             String userAnswer = questions.getUserAnswer();
             if (userAnswer != null && !userAnswer.equals("")) {
                 int userCB = Integer.parseInt(userAnswer) - 1;
                 cbs[userCB].setChecked(true);
                 setOptions(true);
-                setAnswerTextColor(userAnswer, questions.getAnswer());
+                for (CheckBox cb:cbs){
+                    cb.setEnabled(false);
+                    setAnswerTextColor(userAnswer, questions.getAnswer());
+                    tv_explains.setText("解析:\n"+questions.getExplains());
+                }
             } else {
                 setOptions(false);
                 setOptionsColor();
             }
         }
     }
-
     private void setOptionsColor() {
         for (TextView tvOp : tv0ps) {
             tvOp.setTextColor(getResources().getColor(R.color.black));
@@ -234,8 +243,8 @@ public class ExamActivity extends AppCompatActivity {
     private void setAnswerTextColor(String userAnswer, String answer) {
         int ra = Integer.parseInt(answer) - 1;
         for (int i = 0; i < tv0ps.length; i++) {
-            if (i == ra) {
-                tv0ps[i].setTextColor(getResources().getColor(R.color.green));
+          if (i == ra) {
+              tv0ps[i].setTextColor(getResources().getColor(R.color.green));
             } else {
                 if (!userAnswer.equals(answer)) {
                     int ua = Integer.parseInt(userAnswer) - 1;
@@ -252,6 +261,7 @@ public class ExamActivity extends AppCompatActivity {
     private void setOptions(boolean hasAnswer) {
         for (CheckBox cb : cbs) {
             cb.setEnabled(!hasAnswer);
+            tv_explains.setText("");
         }
     }
 
