@@ -299,8 +299,21 @@ public class ExamActivity extends AppCompatActivity {
         saveUserAnswer();
         showExam(biz.nextQuestion());
     }
-
     public void commitExam(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("交卷")
+                .setMessage("你还有剩余时间，确认交卷吗?")
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        commitExam();
+                    }
+                })
+                .setNegativeButton("取消",null);
+        builder.create().show();
+    }
+
+    public void commitExam() {
         saveUserAnswer();
         int s = biz.commitExam();
         View inflate = View.inflate(this, R.layout.layout_result, null);
@@ -316,6 +329,7 @@ public class ExamActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+        builder.setCancelable(false);
         builder.create().show();
     }
 
